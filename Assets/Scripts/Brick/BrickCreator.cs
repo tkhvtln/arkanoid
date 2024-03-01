@@ -4,12 +4,20 @@ using UnityEngine;
 
 public class BrickCreator : MonoBehaviour
 {
+    private int _countBricks = 0;
+    private int _destroyBricks = 0;
+
     [SerializeField] private Brick _brickPrefab;
     [SerializeField] private Texture2D _texBrick;
 
-    void Start()
+    public void Init()
     {
         Create();
+        Brick.OnDestroy.AddListener(() =>
+        {
+            if (_destroyBricks++ >= _countBricks)
+                GameController.Instance.Win();
+        });
     }
 
     private void Create()
@@ -23,9 +31,11 @@ public class BrickCreator : MonoBehaviour
 
                 Brick brick = Instantiate(_brickPrefab, new Vector3(x, y, 0), Quaternion.identity, transform);
                 brick.SetColor(color);
+
+                _countBricks++;
             }
         }
 
-        transform.position = new Vector3(-_texBrick.width / 2, _texBrick.width / 8, 0);
+        transform.position = new Vector3(-_texBrick.width / 2, 0, 0);
     }
 }

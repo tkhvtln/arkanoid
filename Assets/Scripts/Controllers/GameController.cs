@@ -1,12 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.SceneManagement;
 
 public class GameController : MonoBehaviour
 {
     public static GameController Instance;
+    public static UnityEvent OnGame = new UnityEvent();
+
     public bool IsGame => _isGame;
+    public LevelController ControllerLevel { get; set; }
 
     public UIController ControllerUI;
     public SaveController ControllerSave;
@@ -27,7 +31,6 @@ public class GameController : MonoBehaviour
     void Start()
     {
         ControllerSave.Load();
-        ControllerPlayer.Init();
         ControllerSound.Init();
         ControllerUI.Init();
 
@@ -37,27 +40,35 @@ public class GameController : MonoBehaviour
     public void Game() 
     {
         _isGame = true;
+        OnGame?.Invoke();
         ControllerUI.ShowPanelGame();
+        ControllerSound.PlaySound(SoundName.CLICK);
+
+        Cursor.visible = false;
     }
 
     public void Win()
     {
         _isGame = false;
         ControllerUI.ShowPanelWin();
+        ControllerSound.PlaySound(SoundName.WIN);
+
+        Cursor.visible = true;
     }
 
     public void Defeat() 
     {
         _isGame = false;
         ControllerUI.ShowPanelDefeat();
+        ControllerSound.PlaySound(SoundName.DEFEAT);
+
+        Cursor.visible = true;
     }
 
     public void LoadCurrentLevel() 
     {
         UnloadScene();
         LoadScene();
-
-        ControllerUI.ShowPanelMenu();
     }
 
     public void LoadNextLevel() 
@@ -68,9 +79,6 @@ public class GameController : MonoBehaviour
         ControllerSave.Save();
 
         LoadScene();
-
-
-        ControllerUI.ShowPanelMenu();
     }
 
     private void LoadScene()
@@ -80,6 +88,9 @@ public class GameController : MonoBehaviour
             _isSceneLoaded = true;
             SceneManager.LoadSceneAsync(ControllerSave.DataPlayer.Level, LoadSceneMode.Additive);
         }
+
+        ControllerPlayer.Init();
+        ControllerUI.ShowPanelMenu();
     }
 
     private void UnloadScene()

@@ -68,9 +68,14 @@ public class SoundController : MonoBehaviour
         public AudioSource audioSource;
         public AudioClip audioClip;
     }
+}
 
-    public enum SoundName
-    {
-        NONE
-    }
+public enum SoundName
+{
+    NONE,
+    CLICK,
+    DESTROY,
+    COLLISION,
+    WIN,
+    DEFEAT
 }
