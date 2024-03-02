@@ -49,7 +49,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _meshRenderer: {fileID: 4962140884423763771}
-  _destroyEffect: {fileID: 4886111853168192807}
+  _effectDestroy: {fileID: 4886111853168192807}
 --- !u!33 &4027051655946135371
 MeshFilter:
   m_ObjectHideFlags: 0

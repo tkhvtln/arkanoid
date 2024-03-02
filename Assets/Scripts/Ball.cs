@@ -1,28 +1,32 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEngine.ParticleSystem;
 
 public class Ball : MonoBehaviour
 {
+    [SerializeField] private TrailRenderer _trail;
+    [SerializeField] private ParticleSystem _effectDestroy;
+
     private float _speed;
 
     private Rigidbody _rb;
     private Vector3 _vecVelocity;
 
-    public void Init(float speed)
+    public void Init(float speed, Vector3 vecPosition)
     {
         gameObject.SetActive(true);
 
         _speed = speed;
+        _effectDestroy.transform.parent = transform;
+
+        transform.rotation = Quaternion.Euler(0, 0, Random.Range(-60, 60));
+        transform.position = vecPosition + new Vector3(0, transform.localScale.y / 2 + 0.1f, 0);
 
         _rb = GetComponent<Rigidbody>();
-        _rb.velocity = Vector3.zero;
-        _rb.angularVelocity = Vector3.zero;
-        
-        transform.position = new Vector3(0, -5, 0);
-        transform.rotation = Quaternion.Euler(0, 0, Random.Range(-60, 60));
-        
-        GameController.OnGame.AddListener(() => _rb.velocity = -transform.up * _speed);
+        _rb.ResetVelocity();
+  
+        GameController.OnGame.AddListener(() => _rb.velocity = transform.up * _speed);
     }
 
     void FixedUpdate()
@@ -35,6 +39,8 @@ public class Ball : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
+        if (!GameController.Instance.IsGame) return;
+
         Vector3 vecReflect = Vector3.Reflect(_vecVelocity, collision.contacts[0].normal);
         if (Vector3.Angle(vecReflect, collision.contacts[0].normal) < 10)
             vecReflect = Quaternion.Euler(0, 0, 10) * vecReflect;
@@ -44,6 +50,11 @@ public class Ball : MonoBehaviour
         if (collision.gameObject.CompareTag(Constants.TAG_BOTTOM))
         {
             GameController.Instance.Defeat();
+
+            _trail.Clear();
+            _effectDestroy.transform.parent = null;
+            _effectDestroy.Play();
+            
             gameObject.SetActive(false);
         }
 

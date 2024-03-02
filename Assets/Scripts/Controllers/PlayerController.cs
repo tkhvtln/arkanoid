@@ -28,7 +28,8 @@ public class PlayerController : MonoBehaviour
         _rb = GetComponent<Rigidbody>();        
         _transform.position = new Vector3(0, _transform.position.y, 0);
 
-        _ball.Init(_playerConfig.SpeedBall);
+        Vector3 vecPostionSpawnBall = transform.position + new Vector3(0, _trPlatform.localScale.y / 2, 0);
+        _ball.Init(_playerConfig.SpeedBall, vecPostionSpawnBall);
     }
 
     void Update()

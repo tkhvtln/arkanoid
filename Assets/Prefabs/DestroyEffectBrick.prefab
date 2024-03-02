@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3133256024109264462}
   - component: {fileID: 6577653064862827950}
   m_Layer: 0
-  m_Name: DestroyEffect
+  m_Name: DestroyEffectBrick
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -8,12 +8,12 @@ public class Brick : MonoBehaviour
     public static UnityEvent OnDestroy = new UnityEvent();
 
     [SerializeField] private MeshRenderer _meshRenderer;
-    [SerializeField] private ParticleSystem _destroyEffect;
+    [SerializeField] private ParticleSystem _effectDestroy;
 
     public void SetColor(Color color)
     {
         _meshRenderer.material.color = color;
-        _destroyEffect.GetComponent<ParticleSystemRenderer>().material.color = color;  
+        _effectDestroy.GetComponent<ParticleSystemRenderer>().material.color = color;  
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -22,8 +22,8 @@ public class Brick : MonoBehaviour
         {
             OnDestroy?.Invoke();
 
-            _destroyEffect.Play();
-            _destroyEffect.transform.parent = transform.parent;
+            _effectDestroy.Play();
+            _effectDestroy.transform.parent = transform.parent;
 
             GameController.Instance.ControllerSound.PlaySound(SoundName.DESTROY);
 
