@@ -19,7 +19,7 @@ public class Ball : MonoBehaviour
         _rb.velocity = Vector3.zero;
         _rb.angularVelocity = Vector3.zero;
         
-        transform.position = new Vector3(0, -10, 0);
+        transform.position = new Vector3(0, -5, 0);
         transform.rotation = Quaternion.Euler(0, 0, Random.Range(-60, 60));
         
         GameController.OnGame.AddListener(() => _rb.velocity = -transform.up * _speed);
@@ -35,7 +35,11 @@ public class Ball : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        _rb.velocity = Vector3.Reflect(_vecVelocity, collision.contacts[0].normal);
+        Vector3 vecReflect = Vector3.Reflect(_vecVelocity, collision.contacts[0].normal);
+        if (Vector3.Angle(vecReflect, collision.contacts[0].normal) < 10)
+            vecReflect = Quaternion.Euler(0, 0, 10) * vecReflect;
+
+        _rb.velocity = vecReflect;
 
         if (collision.gameObject.CompareTag(Constants.TAG_BOTTOM))
         {
