@@ -4,18 +4,21 @@ using UnityEngine;
 
 public class BrickCreator : MonoBehaviour
 {
+    [SerializeField] private Brick _brickPrefab;
+
+    private Texture2D _texBrick;
+
     private int _countBricks = 0;
     private int _destroyBricks = 0;
 
-    [SerializeField] private Brick _brickPrefab;
-    [SerializeField] private Texture2D _texBrick;
-
-    public void Init()
+    public void Init(Texture2D texBrick)
     {
+        _texBrick = texBrick;
+
         Create();
         Brick.OnDestroy.AddListener(() =>
         {
-            if (_destroyBricks++ >= _countBricks)
+            if (++_destroyBricks >= _countBricks)
                 GameController.Instance.Win();
         });
     }

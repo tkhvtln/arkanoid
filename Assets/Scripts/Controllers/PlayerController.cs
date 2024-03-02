@@ -5,8 +5,9 @@ using UnityEngine.UIElements;
 
 public class PlayerController : MonoBehaviour
 {
-    [SerializeField] private Ball _ball;
+    [SerializeField] private PlayerConfig _playerConfig;
     [SerializeField] private Transform _trPlatform;
+    [SerializeField] private Ball _ball;
 
     private Vector3 _vecMove;
 
@@ -27,7 +28,7 @@ public class PlayerController : MonoBehaviour
         _rb = GetComponent<Rigidbody>();        
         _transform.position = new Vector3(0, _transform.position.y, 0);
 
-        _ball.Init();
+        _ball.Init(_playerConfig.SpeedBall);
     }
 
     void Update()

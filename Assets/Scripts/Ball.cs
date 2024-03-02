@@ -4,20 +4,22 @@ using UnityEngine;
 
 public class Ball : MonoBehaviour
 {
-    [SerializeField] private float _speed = 20;
+    private float _speed;
 
     private Rigidbody _rb;
     private Vector3 _vecVelocity;
 
-    public void Init()
+    public void Init(float speed)
     {
         gameObject.SetActive(true);
+
+        _speed = speed;
 
         _rb = GetComponent<Rigidbody>();
         _rb.velocity = Vector3.zero;
         _rb.angularVelocity = Vector3.zero;
         
-        transform.position = Vector3.zero;
+        transform.position = new Vector3(0, -10, 0);
         transform.rotation = Quaternion.Euler(0, 0, Random.Range(-60, 60));
         
         GameController.OnGame.AddListener(() => _rb.velocity = -transform.up * _speed);
@@ -25,6 +27,8 @@ public class Ball : MonoBehaviour
 
     void FixedUpdate()
     {
+        if (!GameController.Instance.IsGame) return;
+
         _rb.velocity = _rb.velocity.normalized * _speed;
         _vecVelocity = _rb.velocity;
     }

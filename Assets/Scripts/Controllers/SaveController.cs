@@ -22,12 +22,6 @@ public class SaveController : MonoBehaviour
             DataPlayer = new Data();
         }
     }
-
-    [ContextMenu("Reset save")]
-    public void ResetSave()
-    {
-        PlayerPrefs.DeleteAll();
-    }
 }
 
 public class Data
@@ -38,6 +32,6 @@ public class Data
     public Data()
     {
         IsSound = true;
-        Level = 1;
+        Level = 0;
     }
 }

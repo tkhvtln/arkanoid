@@ -68,27 +68,30 @@ public class GameController : MonoBehaviour
     public void LoadCurrentLevel() 
     {
         UnloadScene();
-        LoadScene();
+        StartCoroutine(LoadScene());
     }
 
     public void LoadNextLevel() 
     {
         UnloadScene();
 
-        ControllerSave.DataPlayer.Level = ++ControllerSave.DataPlayer.Level >= SceneManager.sceneCountInBuildSettings ? 1 : ControllerSave.DataPlayer.Level;
+        ControllerSave.DataPlayer.Level = ++ControllerSave.DataPlayer.Level;
         ControllerSave.Save();
 
-        LoadScene();
+        StartCoroutine(LoadScene());
     }
 
-    private void LoadScene()
+    private IEnumerator LoadScene()
     {
         if (!_isSceneLoaded)
         {
             _isSceneLoaded = true;
-            SceneManager.LoadSceneAsync(ControllerSave.DataPlayer.Level, LoadSceneMode.Additive);
+
+            AsyncOperation operation = SceneManager.LoadSceneAsync(1, LoadSceneMode.Additive);
+            while (!operation.isDone) yield return null;
         }
 
+        ControllerLevel.Init(ControllerSave.DataPlayer.Level);
         ControllerPlayer.Init();
         ControllerUI.ShowPanelMenu();
     }
@@ -98,7 +101,7 @@ public class GameController : MonoBehaviour
         if (_isSceneLoaded)
         {
             _isSceneLoaded = false;
-            SceneManager.UnloadSceneAsync(ControllerSave.DataPlayer.Level);
+            SceneManager.UnloadSceneAsync(1);
         }
     }
 }

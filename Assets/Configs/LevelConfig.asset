@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ac71f1d44b780ea4ba5ae3534d34b295, type: 3}
+  m_Name: LevelConfig
+  m_EditorClassIdentifier: 
+  TextureBricks:
+  - {fileID: 2800000, guid: aa5f9f59075154d45aa704972e61c699, type: 3}
+  - {fileID: 2800000, guid: 317a03e254e7e6a43a601cd078fc1b8f, type: 3}

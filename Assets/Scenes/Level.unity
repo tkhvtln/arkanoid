@@ -378,7 +378,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _brickPrefab: {fileID: 5900705798996786562, guid: 68b8e75a0908b3448b10f14b6bb42bf7, type: 3}
-  _texBrick: {fileID: 2800000, guid: aa5f9f59075154d45aa704972e61c699, type: 3}
 --- !u!1 &1061840884
 GameObject:
   m_ObjectHideFlags: 0
@@ -759,6 +758,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 35cf8e3e54643994c900c2bc51b6377f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _levelConfig: {fileID: 11400000, guid: 509bcf7f3ce9b07439dead25bb1396f6, type: 2}
   _brickCreator: {fileID: 995305639}
   _walls:
     trWallLeft: {fileID: 436742275}
