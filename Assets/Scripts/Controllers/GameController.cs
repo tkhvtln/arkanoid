@@ -75,7 +75,7 @@ public class GameController : MonoBehaviour
     {
         UnloadScene();
 
-        ControllerSave.DataPlayer.Level = ++ControllerSave.DataPlayer.Level;
+        ++ControllerSave.DataPlayer.Level;
         ControllerSave.Save();
 
         StartCoroutine(LoadScene());
@@ -91,9 +91,9 @@ public class GameController : MonoBehaviour
             while (!operation.isDone) yield return null;
         }
 
-        ControllerLevel.Init(ControllerSave.DataPlayer.Level);
         ControllerPlayer.Init();
-        ControllerUI.ShowPanelMenu();
+        ControllerLevel.Init(ControllerSave.DataPlayer.Level);
+        ControllerUI.ShowPanelMenu(ControllerSave.DataPlayer.Level);
     }
 
     private void UnloadScene()

@@ -17,10 +17,10 @@ public class UIController : MonoBehaviour
         PanelDefeat.Init();
     }
 
-    public void ShowPanelMenu() 
+    public void ShowPanelMenu(int level) 
     {
         Clear();
-        PanelMenu.Show();
+        PanelMenu.Show(level);
     }
 
     public void ShowPanelGame() 
