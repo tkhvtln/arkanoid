@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   TextureBricks:
   - {fileID: 2800000, guid: aa5f9f59075154d45aa704972e61c699, type: 3}
-  - {fileID: 2800000, guid: 317a03e254e7e6a43a601cd078fc1b8f, type: 3}
+  - {fileID: 2800000, guid: c44034176b1a39f41a4fce9e062be4ea, type: 3}

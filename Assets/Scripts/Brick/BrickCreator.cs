@@ -30,7 +30,7 @@ public class BrickCreator : MonoBehaviour
             for (int y = 0;  y < _texBrick.height; y++)
             {
                 Color color = _texBrick.GetPixel(x, y);
-                if (color.a == 0) continue;
+                if (color.a < 0.5f) continue;
 
                 Brick brick = Instantiate(_brickPrefab, new Vector3(x, y, 0), Quaternion.identity, transform);
                 brick.SetColor(color);
