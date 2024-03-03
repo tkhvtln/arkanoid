@@ -13,3 +13,4 @@ MonoBehaviour:
   m_Name: PlayerConfig
   m_EditorClassIdentifier: 
   SpeedBall: 20
+  SpeedPlatfrom: 0.04

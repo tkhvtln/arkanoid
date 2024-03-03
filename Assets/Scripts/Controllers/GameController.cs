@@ -90,9 +90,10 @@ public class GameController : MonoBehaviour
             AsyncOperation operation = SceneManager.LoadSceneAsync(1, LoadSceneMode.Additive);
             while (!operation.isDone) yield return null;
         }
-
-        ControllerPlayer.Init();
+     
         ControllerLevel.Init(ControllerSave.DataPlayer.Level);
+        ControllerPlayer.Init();
+
         ControllerUI.ShowPanelMenu(ControllerSave.DataPlayer.Level);
     }
 
