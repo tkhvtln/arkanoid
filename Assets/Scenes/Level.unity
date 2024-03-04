@@ -344,7 +344,7 @@ GameObject:
   - component: {fileID: 995305638}
   - component: {fileID: 995305639}
   m_Layer: 0
-  m_Name: Bricks
+  m_Name: BricksCreator
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -363,7 +363,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &995305639
 MonoBehaviour:
@@ -597,6 +597,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1591940578}
+  - component: {fileID: 1591940579}
   m_Layer: 0
   m_Name: Walls
   m_TagString: Untagged
@@ -622,8 +623,24 @@ Transform:
   - {fileID: 160087165}
   - {fileID: 1463145863}
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1591940579
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1591940577}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 645889db2a237b74d8da651e39b4c37d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  trWallLeft: {fileID: 436742275}
+  trWallRight: {fileID: 1906107551}
+  trWallBottom: {fileID: 160087165}
+  trWallTop: {fileID: 1463145863}
 --- !u!1 &1906107550
 GameObject:
   m_ObjectHideFlags: 0
@@ -760,11 +777,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _levelConfig: {fileID: 11400000, guid: 509bcf7f3ce9b07439dead25bb1396f6, type: 2}
   _brickCreator: {fileID: 995305639}
-  _walls:
-    trWallLeft: {fileID: 436742275}
-    trWallRight: {fileID: 1906107551}
-    trWallBottom: {fileID: 160087165}
-    trWallTop: {fileID: 1463145863}
+  _walls: {fileID: 1591940579}
 --- !u!4 &2050916115
 Transform:
   m_ObjectHideFlags: 0

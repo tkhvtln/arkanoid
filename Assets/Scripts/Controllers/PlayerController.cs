@@ -35,8 +35,8 @@ public class PlayerController : MonoBehaviour
         _vecMovement = Vector3.zero;
         _rb = GetComponent<Rigidbody>();
 
-        _clampLeft = _levelController.clampLeft + _trPlatform.localScale.x / 2;
-        _clampRight = _levelController.clampRight - _trPlatform.localScale.x / 2;
+        _clampLeft = _levelController.ÑlampLeft + _trPlatform.localScale.x / 2;
+        _clampRight = _levelController.ÑlampRight - _trPlatform.localScale.x / 2;
 
         _transform.position = new Vector3(0, _transform.position.y, 0);
         Vector3 vecPostionSpawnBall = transform.position + new Vector3(0, _trPlatform.localScale.y / 2, 0);
