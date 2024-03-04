@@ -10,7 +10,7 @@ public class GameController : MonoBehaviour
     public static UnityEvent OnGame = new UnityEvent();
     public static UnityEvent OnWin = new UnityEvent();
 
-    public bool IsGame => _isGame;
+    public bool IsGame { get; private set; }
     public LevelController ControllerLevel { get; set; }
 
     public UIController ControllerUI;
@@ -18,7 +18,6 @@ public class GameController : MonoBehaviour
     public SoundController ControllerSound;
     public PlayerController ControllerPlayer;
 
-    private bool _isGame;
     private bool _isSceneLoaded;
 
     void Awake() 
@@ -40,7 +39,7 @@ public class GameController : MonoBehaviour
 
     public void Game() 
     {
-        _isGame = true;
+        IsGame = true;
         OnGame?.Invoke();
         ControllerUI.ShowPanelGame();
         ControllerSound.PlaySound(SoundName.CLICK);
@@ -50,7 +49,7 @@ public class GameController : MonoBehaviour
 
     public void Win()
     {
-        _isGame = false;
+        IsGame = false;
         OnWin?.Invoke();
         ControllerUI.ShowPanelWin();
         ControllerSound.PlaySound(SoundName.WIN);
@@ -60,7 +59,7 @@ public class GameController : MonoBehaviour
 
     public void Defeat() 
     {
-        _isGame = false;
+        IsGame = false;
         ControllerUI.ShowPanelDefeat();
         ControllerSound.PlaySound(SoundName.DEFEAT);
 
