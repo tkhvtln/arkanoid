@@ -15,7 +15,8 @@ public class LevelController : MonoBehaviour
 
     void Start() 
     {
-        GameController.Instance.ControllerLevel = this;     
+        if (GameController.Instance != null)
+            GameController.Instance.ControllerLevel = this;     
     }
 
     public void Init(int level)
