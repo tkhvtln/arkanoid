@@ -6,7 +6,6 @@ using UnityEngine.UIElements;
 public class PlayerController : MonoBehaviour
 {
     [SerializeField] private PlayerConfig _playerConfig;
-    [SerializeField] private Transform _trPlatform;
     [SerializeField] private Ball _ball;
 
     private Vector3 _vecMovement;
@@ -35,11 +34,11 @@ public class PlayerController : MonoBehaviour
         _vecMovement = Vector3.zero;
         _rb = GetComponent<Rigidbody>();
 
-        _clampLeft = _levelController.ÑlampLeft + _trPlatform.localScale.x / 2;
-        _clampRight = _levelController.ÑlampRight - _trPlatform.localScale.x / 2;
+        _clampLeft = _levelController.ÑlampLeft + _transform.localScale.x / 2;
+        _clampRight = _levelController.ÑlampRight - _transform.localScale.x / 2;
 
-        _transform.position = new Vector3(0, _transform.position.y, 0);
-        Vector3 vecPostionSpawnBall = transform.position + new Vector3(0, _trPlatform.localScale.y / 2, 0);
+        _transform.position = Vector3.up * _transform.position.y;
+        Vector3 vecPostionSpawnBall = _transform.position + Vector3.up * _transform.localScale.y / 2;
 
         _ball.Init(_playerConfig.SpeedBall, vecPostionSpawnBall);     
     }

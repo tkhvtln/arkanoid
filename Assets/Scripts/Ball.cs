@@ -14,8 +14,6 @@ public class Ball : MonoBehaviour
 
     public void Init(float speed, Vector3 vecPosition)
     {
-        gameObject.SetActive(true);
-
         _speed = speed;
         _effectDestroy.transform.parent = transform;
 
@@ -27,6 +25,8 @@ public class Ball : MonoBehaviour
   
         GameController.OnGame.AddListener(() => _rb.velocity = transform.up * _speed);
         GameController.OnWin.AddListener(() => gameObject.SetActive(false));
+
+        gameObject.SetActive(true);
     }
 
     void FixedUpdate()
