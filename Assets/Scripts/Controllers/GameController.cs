@@ -8,6 +8,7 @@ public class GameController : MonoBehaviour
 {
     public static GameController Instance;
     public static UnityEvent OnGame = new UnityEvent();
+    public static UnityEvent OnWin = new UnityEvent();
 
     public bool IsGame => _isGame;
     public LevelController ControllerLevel { get; set; }
@@ -50,6 +51,7 @@ public class GameController : MonoBehaviour
     public void Win()
     {
         _isGame = false;
+        OnWin?.Invoke();
         ControllerUI.ShowPanelWin();
         ControllerSound.PlaySound(SoundName.WIN);
 

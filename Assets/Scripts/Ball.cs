@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using static UnityEngine.ParticleSystem;
 
 public class Ball : MonoBehaviour
 {
@@ -27,6 +26,7 @@ public class Ball : MonoBehaviour
         _rb.ResetVelocity();
   
         GameController.OnGame.AddListener(() => _rb.velocity = transform.up * _speed);
+        GameController.OnWin.AddListener(() => gameObject.SetActive(false));
     }
 
     void FixedUpdate()
@@ -50,12 +50,11 @@ public class Ball : MonoBehaviour
 
         if (collision.gameObject.CompareTag(Constants.TAG_BOTTOM))
         {
-            GameController.Instance.Defeat();
-
             _trail.Clear();
             _effectDestroy.transform.parent = null;
             _effectDestroy.Play();
-            
+
+            GameController.Instance.Defeat();
             gameObject.SetActive(false);
         }        
     }
