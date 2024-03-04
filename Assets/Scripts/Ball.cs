@@ -39,13 +39,14 @@ public class Ball : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (!GameController.Instance.IsGame) return;
-
         Vector3 vecReflect = Vector3.Reflect(_vecVelocity, collision.contacts[0].normal);
-        if (Vector3.Angle(vecReflect, collision.contacts[0].normal) < 10)
+        if (Vector3.Angle(vecReflect, collision.contacts[0].normal) < 1)
             vecReflect = Quaternion.Euler(0, 0, 10) * vecReflect;
 
         _rb.velocity = vecReflect;
+
+        if (!collision.gameObject.CompareTag(Constants.TAG_BRICK) || !collision.gameObject.CompareTag(Constants.TAG_BOTTOM))
+            GameController.Instance.ControllerSound.PlaySound(SoundName.COLLISION);
 
         if (collision.gameObject.CompareTag(Constants.TAG_BOTTOM))
         {
@@ -56,12 +57,6 @@ public class Ball : MonoBehaviour
             _effectDestroy.Play();
             
             gameObject.SetActive(false);
-        }
-
-        if (!collision.gameObject.CompareTag(Constants.TAG_BRICK) ||
-            !collision.gameObject.CompareTag(Constants.TAG_BOTTOM))
-        {
-            GameController.Instance.ControllerSound.PlaySound(SoundName.COLLISION);
-        }
+        }        
     }
 }
