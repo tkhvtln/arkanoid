@@ -1,7 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UIElements;
 
 public class PlayerController : MonoBehaviour
 {
@@ -34,8 +31,8 @@ public class PlayerController : MonoBehaviour
         _vecMovement = Vector3.zero;
         _rb = GetComponent<Rigidbody>();
 
-        _clampLeft = _levelController.ÑlampLeft + _transform.localScale.x / 2;
-        _clampRight = _levelController.ÑlampRight - _transform.localScale.x / 2;
+        _clampLeft = _levelController.Wall.ÑlampLeft + _transform.localScale.x / 2;
+        _clampRight = _levelController.Wall.ÑlampRight - _transform.localScale.x / 2;
 
         _transform.position = Vector3.up * _transform.position.y;
         Vector3 vecPostionSpawnBall = _transform.position + Vector3.up * _transform.localScale.y / 2;

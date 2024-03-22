@@ -637,10 +637,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 645889db2a237b74d8da651e39b4c37d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  trWallLeft: {fileID: 436742275}
-  trWallRight: {fileID: 1906107551}
-  trWallBottom: {fileID: 160087165}
-  trWallTop: {fileID: 1463145863}
+  _trWallLeft: {fileID: 436742275}
+  _trWallRight: {fileID: 1906107551}
+  _trWallBottom: {fileID: 160087165}
+  _trWallTop: {fileID: 1463145863}
 --- !u!1 &1906107550
 GameObject:
   m_ObjectHideFlags: 0
