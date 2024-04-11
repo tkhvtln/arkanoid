@@ -2,11 +2,11 @@ using UnityEngine;
 
 public class SaveController : MonoBehaviour
 {
-    public Data DataPlayer;
+    public Data data;
 
     public void Save()
     {
-        string jsonDataString = JsonUtility.ToJson(DataPlayer, true);
+        string jsonDataString = JsonUtility.ToJson(data, true);
         PlayerPrefs.SetString(Constants.DATA, jsonDataString);
     }
 
@@ -15,23 +15,23 @@ public class SaveController : MonoBehaviour
         if (PlayerPrefs.HasKey(Constants.DATA))
         {
             string loadedString = PlayerPrefs.GetString(Constants.DATA);
-            DataPlayer = JsonUtility.FromJson<Data>(loadedString);
+            data = JsonUtility.FromJson<Data>(loadedString);
         }
         else
         {
-            DataPlayer = new Data();
+            data = new Data();
         }
     }
 }
 
 public class Data
 {
-    public bool IsSound;
-    public int Level;
+    public bool isSound;
+    public int level;
 
     public Data()
     {
-        IsSound = true;
-        Level = 0;
+        isSound = true;
+        level = 0;
     }
 }

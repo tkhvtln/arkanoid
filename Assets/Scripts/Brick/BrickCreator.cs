@@ -17,7 +17,7 @@ public class BrickCreator : MonoBehaviour
         Brick.OnDestroy.AddListener(() =>
         {
             if (++_destroyBricks >= _countBricks)
-                GameController.Instance.Win();
+                GameController.instance.Win();
         });
     }
 

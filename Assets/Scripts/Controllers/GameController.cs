@@ -5,33 +5,34 @@ using UnityEngine.SceneManagement;
 
 public class GameController : MonoBehaviour
 {
-    public static GameController Instance;
+    public static GameController instance;
+
     public static UnityEvent OnGame = new UnityEvent();
     public static UnityEvent OnWin = new UnityEvent();
 
     public bool IsGame { get; private set; }
-    public LevelController ControllerLevel { get; set; }
+    public LevelController levelController { get; set; }
 
-    public UIController ControllerUI;
-    public SaveController ControllerSave;
-    public SoundController ControllerSound;
-    public PlayerController ControllerPlayer;
+    public UIController uiController;
+    public SaveController saveController;
+    public SoundController soundController;
+    public PlayerController playerController;
 
     private bool _isSceneLoaded;
 
     void Awake() 
     {
-        if (Instance == null)
-            Instance = this;
+        if (instance == null)
+            instance = this;
         else
             Destroy(this);
     }
 
     void Start()
     {
-        ControllerSave.Load();
-        ControllerSound.Init();
-        ControllerUI.Init();
+        saveController.Load();
+        soundController.Init();
+        uiController.Init();
 
         LoadCurrentLevel();
     }
@@ -40,8 +41,8 @@ public class GameController : MonoBehaviour
     {
         IsGame = true;
         OnGame?.Invoke();
-        ControllerUI.ShowPanelGame();
-        ControllerSound.PlaySound(SoundName.CLICK);
+        uiController.ShowPanelGame();
+        soundController.PlaySound(SoundName.CLICK);
 
         Cursor.visible = false;
     }
@@ -50,8 +51,8 @@ public class GameController : MonoBehaviour
     {
         IsGame = false;
         OnWin?.Invoke();
-        ControllerUI.ShowPanelWin();
-        ControllerSound.PlaySound(SoundName.WIN);
+        uiController.ShowPanelWin();
+        soundController.PlaySound(SoundName.WIN);
 
         Cursor.visible = true;
     }
@@ -59,8 +60,8 @@ public class GameController : MonoBehaviour
     public void Defeat() 
     {
         IsGame = false;
-        ControllerUI.ShowPanelDefeat();
-        ControllerSound.PlaySound(SoundName.DEFEAT);
+        uiController.ShowPanelDefeat();
+        soundController.PlaySound(SoundName.DEFEAT);
 
         Cursor.visible = true;
     }
@@ -75,8 +76,8 @@ public class GameController : MonoBehaviour
     {
         UnloadScene();
 
-        ++ControllerSave.DataPlayer.Level;
-        ControllerSave.Save();
+        ++saveController.data.level;
+        saveController.Save();
 
         StartCoroutine(LoadScene());
     }
@@ -91,10 +92,10 @@ public class GameController : MonoBehaviour
             while (!operation.isDone) yield return null;
         }
      
-        ControllerLevel.Init(ControllerSave.DataPlayer.Level);
-        ControllerPlayer.Init();
+        levelController.Init(saveController.data.level);
+        playerController.Init();
 
-        ControllerUI.ShowPanelMenu(ControllerSave.DataPlayer.Level);
+        uiController.ShowPanelMenu(saveController.data.level);
     }
 
     private void UnloadScene()

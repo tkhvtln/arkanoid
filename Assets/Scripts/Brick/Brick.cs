@@ -23,7 +23,7 @@ public class Brick : MonoBehaviour
             _effectDestroy.Play();
             _effectDestroy.transform.parent = transform.parent;
 
-            GameController.Instance.ControllerSound.PlaySound(SoundName.DESTROY);
+            GameController.instance.soundController.PlaySound(SoundName.DESTROY);
 
             gameObject.SetActive(false);
         }

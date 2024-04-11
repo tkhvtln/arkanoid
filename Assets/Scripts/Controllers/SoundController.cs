@@ -14,7 +14,7 @@ public class SoundController : MonoBehaviour
 
     public void Init()
     {
-        _isSound = GameController.Instance.ControllerSave.DataPlayer.IsSound;
+        _isSound = GameController.instance.saveController.data.isSound;
         _image.sprite = _isSound ? _sprSoundOn : _sprSoundOff;
         AudioListener.volume = _isSound ? 1 : 0;
     }
@@ -55,8 +55,8 @@ public class SoundController : MonoBehaviour
 
         AudioListener.volume = _isSound ? 1 : 0;
 
-        GameController.Instance.ControllerSave.DataPlayer.IsSound = _isSound;
-        GameController.Instance.ControllerSave.Save();
+        GameController.instance.saveController.data.isSound = _isSound;
+        GameController.instance.saveController.Save();
     }
 
     [System.Serializable]

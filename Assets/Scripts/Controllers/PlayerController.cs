@@ -21,7 +21,7 @@ public class PlayerController : MonoBehaviour
     private float _currentX = 0;
     #endregion
 
-    private LevelController _levelController => GameController.Instance.ControllerLevel;
+    private LevelController _levelController => GameController.instance.levelController;
 
     public void Init()
     {
@@ -42,7 +42,7 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        if (!GameController.Instance.IsGame) return;
+        if (!GameController.instance.IsGame) return;
 
 #if UNITY_EDITOR
         GetInputDesktop();
@@ -57,7 +57,7 @@ public class PlayerController : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (!GameController.Instance.IsGame) return;
+        if (!GameController.instance.IsGame) return;
 
         _rb.MovePosition(_vecMovement);
     }

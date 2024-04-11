@@ -29,7 +29,7 @@ public class Ball : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (!GameController.Instance.IsGame) return;
+        if (!GameController.instance.IsGame) return;
 
         _rb.velocity = _rb.velocity.normalized * _speed;
         _vecVelocity = _rb.velocity;
@@ -44,7 +44,7 @@ public class Ball : MonoBehaviour
         _rb.velocity = vecReflect;
 
         if (!collision.gameObject.CompareTag(Constants.TAG_BRICK) || !collision.gameObject.CompareTag(Constants.TAG_BOTTOM))
-            GameController.Instance.ControllerSound.PlaySound(SoundName.COLLISION);
+            GameController.instance.soundController.PlaySound(SoundName.COLLISION);
 
         if (collision.gameObject.CompareTag(Constants.TAG_BOTTOM))
         {
@@ -52,7 +52,7 @@ public class Ball : MonoBehaviour
             _effectDestroy.transform.parent = null;
             _effectDestroy.Play();
 
-            GameController.Instance.Defeat();
+            GameController.instance.Defeat();
             gameObject.SetActive(false);
         }        
     }
